@@ -317,3 +317,20 @@ This architecture prioritizes:
 
 The layered approach with interfaces enables smooth migration from in-memory to production database without touching business logic.
 \*/
+
+## 🚀 Quick Start
+
+### Step 1: Start the Application
+
+```bash
+cd wallet-service
+npm install
+npm run start:dev
+```
+
+**Expected Output:**
+
+```
+🚀 Application is running on: http://localhost:3000
+📚 API Documentation: http://localhost:3000/api/docs
+```

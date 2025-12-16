@@ -1,0 +1,242 @@
+{
+	"info": {
+		"_postman_id": "92900cd3-8295-4b50-ad45-612354a2ad00",
+		"name": "NestJs Wallet Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29484318"
+	},
+	"item": [
+		{
+			"name": "wallets",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "pass token gotten from login here",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/wallets",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"wallets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "wallets(with balance)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"initialBalance\": 500,\n    \"currency\": \"USD\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/wallets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"wallets"
+					]
+				},
+				"description": "CREATE WALLET (With Initial Balance)"
+			},
+			"response": []
+		},
+		{
+			"name": "get wallet by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/wallets/{walletId1}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"wallets",
+						"{walletId1}"
+					]
+				},
+				"description": "GET WALLET BY ID"
+			},
+			"response": []
+		},
+		{
+			"name": "list all wallets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/wallets",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"wallets"
+					]
+				},
+				"description": "LIST ALL WALLETS"
+			},
+			"response": []
+		},
+		{
+			"name": "fund wallet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": 100,\n    \"idempotencyKey\": \"fund-key-001\",\n    \"metadata\": {\n      \"source\": \"bank_transfer\",\n      \"reference\": \"REF123\"\n    }\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/wallets/{{walletId1}}walletId1}}/fund",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"wallets",
+						"{{walletId1}}walletId1}}",
+						"fund"
+					]
+				},
+				"description": "FUND WALLET\n\n\\*💡 Test Idempotency:**  \nClick \"Send\" again with the SAME body → Should return same balance (100, not 200!)"
+			},
+			"response": []
+		},
+		{
+			"name": "Transfer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"targetWalletId\": {{walletId2}},\n    \"amount\": 30,\n    \"idempotencyKey\": \"transfer-key-001\",\n    \"metadata\": {\n      \"reason\": \"Payment for services\"\n    }\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/wallets/{{walletId1}}}/transfer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"wallets",
+						"{{walletId1}}}",
+						"transfer"
+					]
+				},
+				"description": "TRANSFER FUNDS"
+			},
+			"response": []
+		},
+		{
+			"name": "Get wallet details (With Transaction History)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/wallets/{{walletId1}}tId1}}/details",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"wallets",
+						"{{walletId1}}tId1}}",
+						"details"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": ""
+		},
+		{
+			"key": "walletId1",
+			"value": ""
+		},
+		{
+			"key": "walletId2",
+			"value": ""
+		},
+		{
+			"key": "idempotencyKey",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
